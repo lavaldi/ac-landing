@@ -39,11 +39,11 @@ footer{
 	width: 24px;
 }
 #info{
-	border-width: 45px 0 45px 0;
 	border-style: solid;
 	border-color: #d9d9d9;
 }
 #info, #free{
+	border-width: 45px 0 0 0; /*45px 0 45px 0 */
 	text-align: right;
 }
 #info, #after{
@@ -73,7 +73,6 @@ footer{
 }
 #free{
 	background: #fac567;
-	border-width: 45px 0 45px 0;
 	border-style: solid;
 	border-color: #fac567;
 }
@@ -82,7 +81,7 @@ footer{
 }
 #cloud{
 	background: #87ceeb;
-	border-width: 21px 0 21px 0;
+	border-width: 21px 0 0 0; /*21px 0 21px 0;*/
 	border-style: solid;
 	border-color: #87ceeb;
 }
@@ -98,6 +97,29 @@ footer{
 #after{
 	text-align: center;
 }
+/**************SEPARADORES*****************/
+#hr-info{
+	width: 100%;
+	height: 0;
+	border-top: 5em solid #d9d9d9;
+	border-left: 50em solid #87ceeb;
+	border-right: 50em solid #87ceeb;
+}
+#hr-cloud{
+	width: 100%;
+	height: 0;
+	border-top: 5em solid #87ceeb;
+	border-left: 50em solid #fac567;
+	border-right: 50em solid #fac567;
+}
+#hr-free{
+	width: 100%;
+	height: 0;
+	border-top: 5em solid #fac567;
+	border-left: 50em solid #d9d9d9;
+	border-right: 50em solid #d9d9d9;
+}
+/**************FIN SEPARADORES***********/
 .metro .button.coral{
 	background-color: #f74e4d;
 	color:white;
