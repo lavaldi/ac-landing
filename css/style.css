@@ -30,11 +30,48 @@ header, footer{
 	background: #333333;
     width: 100%;
 }
+header{
+    position: fixed;
+    z-index:50;
+}
+#info, #free, #cloud, #after{
+    position: fixed;
+    z-index: 1;
+    width: 100%;  
+    top: 100%;
+}
+#info{
+    z-index: 1;
+}
+#cloud{
+    z-index: 2;
+}
+#free{
+    z-index: 3;
+}
+#after{
+    z-index: 4;
+}
+#info h2, #free h2, #cloud h2{
+    font-size: 42px;
+    font-weight: 400; 
+    line-height: 27pt;
+    text-align: center;
+}
 footer{
 	color:#f4f4f4;
 	padding:20px 0;
 	text-align: center;
 }
+#scrolleddiv{
+    height: 15000px;
+    background: #333333;    
+    width: 100%;
+    margin:0;
+    padding:0;
+    border:0;
+}
+
 #title{
 	margin:0 auto;
 	padding:50px 0;
@@ -120,6 +157,7 @@ footer{
 }
 #after{
 	text-align: center;
+    position: fixed;
 }
 #after img{
     width:30%;
@@ -128,27 +166,7 @@ footer{
     width: 50%;
     margin: 0 auto;
 }
-/**************SEPARADORES*****************/
-/*#hr-info{
-	border-top: 5em solid #d9d9d9;
-	border-left: 50em solid #87ceeb;
-	border-right: 50em solid #87ceeb;
-}
-#hr-cloud{
-	border-top: 5em solid #87ceeb;
-	border-left: 50em solid #fac567;
-	border-right: 50em solid #fac567;
-}
-#hr-free{
-	border-top: 5em solid #fac567;
-	border-left: 50em solid #d9d9d9;
-	border-right: 50em solid #d9d9d9;
-}
-#hr-info, #hr-cloud, #hr-free{
-    width: 100%;
-	height: 0;
-}
-/**************FIN SEPARADORES***********/
+
 a{
     color: #f74e4d;
     text-decoration:none;
@@ -196,38 +214,97 @@ a:hover{
 .row-fluid [class*="span"]{
 	margin:0;
 }
-/*@media screen and (max-width: 1920){
-    #hr-info{
-        border-left: 60em solid #87ceeb;
-        border-right: 60em solid #87ceeb;
-    }
-    #hr-cloud{
-        border-left: 60em solid #fac567;
-        border-right: 60em solid #fac567;
-    }
-    #hr-free{
-        border-left: 60em solid #d9d9d9;
-        border-right: 60em solid #d9d9d9;
-    }
+
+#nav-dots{
+    z-index: 99;
+    position: fixed;
+    top: 49%;
+}
+
+/*.nav-dots {
+    text-align: center;
+    position: absolute;
+    bottom: -5px;
+    height: 30px;
+    width: 100%;
+    left: 0;
+    display: none;
 }*/
+
+.nav-dots span {
+    /*display: inline-block;*/
+    display: block;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    margin: 15px;
+    background: #cbbfae;
+    cursor: pointer;
+    box-shadow: 
+        0 1px 1px rgba(255,255,255,0.6), 
+        inset 0 1px 1px rgba(0,0,0,0.1);
+}
+
+.nav-dots span.nav-dot-current {
+    box-shadow: 
+        0 1px 1px rgba(255,255,255,0.6), 
+        inset 0 1px 1px rgba(0,0,0,0.1), 
+        inset 0 0 0 3px #cbbfae,
+        inset 0 0 0 8px #fff;
+}
+
 @media screen and (max-width:1024px){
+    body{
+        padding: 0;
+    }
+    #info h2, #free h2, #cloud h2{
+        font-size: 52px;
+        font-weight: 400; 
+        line-height: 35pt;
+        text-align: center;
+    }
+    #info p, #free p, #cloud p, #after p{
+        font-size: 25px;
+        font-weight: 300; 
+        line-height: 25pt;
+    }
     .metro .container {
         width: 100%!important;
     }
-    /*#hr-info{
-        border-left: 31em solid #87ceeb;
-        border-right: 31em solid #87ceeb;
-    }
-    #hr-cloud{
-        border-left: 31em solid #fac567;
-        border-right: 31em solid #fac567;
-    }
-    #hr-free{
-        border-left: 31em solid #d9d9d9;
-        border-right: 31em solid #d9d9d9;
-    }*/
 }
+
 @media screen and (max-width:960px){
+    #nav-dots{
+        display: none;
+    }
+    #scrolleddiv{
+        height: 0px;
+    }
+    header,#info, #free, #cloud, #after{
+        position: static;
+        z-index: 0;
+        width: 100%;
+    }
+    #free{
+        z-index: 0;
+    }
+    #after{
+        z-index: 0;
+    }
+    #free{
+        z-index: 0;
+    }
+    #info h2, #free h2, #cloud h2{
+        font-size: 42px;
+        font-weight: 400; 
+        line-height: 27pt;
+        text-align: center;
+    }
+    #info p, #free p, #cloud p, #after p{
+        font-size: 20px;
+        font-weight: 300; 
+        line-height: 25pt;
+    }
     .metro .container {
         width: 100%!important;
     }
@@ -237,92 +314,25 @@ a:hover{
     #title{
         width: 50%;
     }
-    /*#hr-info{
-        border-left: 19em solid #87ceeb;
-        border-right: 19em solid #87ceeb;
-    }
-    #hr-cloud{
-        border-left: 19em solid #fac567;
-        border-right: 19em solid #fac567;
-    }
-    #hr-free{
-        border-left: 19em solid #d9d9d9;
-        border-right: 19em solid #d9d9d9;
-    }*/
+
     .metro .span3, .metro .span4, .metro .span7, .metro .span8, .metro .span12{
         width: 100%!important;
     } 
 }
-/*@media screen and (max-width: 768px) {
-    #hr-info{
-        border-left: 22.5em solid #87ceeb;
-        border-right: 22.5em solid #87ceeb;
-    }
-    #hr-cloud{
-        border-left: 22.5em solid #fac567;
-        border-right: 22.5em solid #fac567;
-    }
-    #hr-free{
-        border-left: 22.5em solid #d9d9d9;
-        border-right: 22.5em solid #d9d9d9;
-    }
-}
-@media screen and (max-width: 600px) {
-    #hr-info{
-        border-left: 18em solid #87ceeb;
-        border-right: 18em solid #87ceeb;
-    }
-    #hr-cloud{
-        border-left: 18em solid #fac567;
-        border-right: 18em solid #fac567;
-    }
-    #hr-free{
-        border-left: 18em solid #d9d9d9;
-        border-right: 18em solid #d9d9d9;
-    }
-}
-@media screen and (max-width: 480px){
-    #hr-info{
-        border-left: 15em solid #87ceeb;
-        border-right: 15em solid #87ceeb;
-    }
-    #hr-cloud{
-        border-left: 15em solid #fac567;
-        border-right: 15em solid #fac567;
-    }
-    #hr-free{
-        border-left: 15em solid #d9d9d9;
-        border-right: 15em solid #d9d9d9;
-    }
-}
-@media screen and (max-width: 384px){
-    #hr-info{
-        border-left: 12em solid #87ceeb;
-        border-right: 12em solid #87ceeb;
-    }
-    #hr-cloud{
-        border-left: 12em solid #fac567;
-        border-right: 12em solid #fac567;
-    }
-    #hr-free{
-        border-left: 12em solid #d9d9d9;
-        border-right: 12em solid #d9d9d9;
-    }
-}*/
+
 @media screen and (max-width: 320px) {
+    #info h2, #free h2, #cloud h2{
+        font-size: 30px;
+        font-weight: 400; 
+        line-height: 15pt;
+        text-align: center;
+    }
+    #info p, #free p, #cloud p, #after p{
+        font-size: 15px;
+        font-weight: 300; 
+        line-height: 15pt;
+    }
     #info, #cloud, #free{
         text-align: center;
     }
-    /*#hr-info{
-        border-left: 10em solid #87ceeb;
-        border-right: 10em solid #87ceeb;
-    }
-    #hr-cloud{
-        border-left: 10em solid #fac567;
-        border-right: 10em solid #fac567;
-    }
-    #hr-free{
-        border-left: 10em solid #d9d9d9;
-        border-right: 10em solid #d9d9d9;
-    }*/
 }

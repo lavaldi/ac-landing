@@ -50,6 +50,8 @@
             </div>
         </div>
     </header>
+    <div id="scrolleddiv">
+    </div>
     <div id="info">
         <div class="container">
             <div class="row">
@@ -125,9 +127,64 @@
             </div>
         </div>
     </div>
+    <div id="nav-dots" class="nav-dots">
+        <span percent="0%" data="0" class="nav-dot-current"></span>
+        <span percent="31%" data="1"></span>
+        <span percent="61%" data="2"></span>
+        <span percent="100%" data="3"></span>
+    </div>
     <footer>
         © Copyright 2013 <a href="http://clmdevelopers.com" target="_blank">CLM Developers</a>. All Rights Reserved.
     </footer>
 </body>
+<script src="js/jquery/jquery-1.8.2.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.11.1/TweenMax.min.js"></script>
+<script src="http://www.jarallax.com/demo3/jarallax-0.2.3b.js"></script>
+<script src="http://airve.github.io/js/response/response.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(document).scroll(function(event){
+            var percent = ($(document).scrollTop()/15000)*100
+            if(percent<10)
+                setCurrentDot(0);
+            else if(percent>10 && percent<30)
+                setCurrentDot(1);
+            else if(percent>30 && percent<60)
+                setCurrentDot(2);
+            else if(percent>60 && percent<100)
+                setCurrentDot(3);
+        });
+        var R = Response; 
+        if(R.viewportW()>=960){
+            if(R.viewportW()>=1204)
+                var limittop = R.deviceH()*0.30
+            else
+                var limittop = R.deviceH()*0.25
+            var jarallax = new Jarallax(new ControllerScroll(true));
+            console.log(R.viewportW());
+            jarallax.setDefault('#info', {top:limittop+'px'});
+            jarallax.setDefault('#cloud,#free,#after', {display:'none'});
+            jarallax.addAnimation('#info', [{progress:'0%', top:limittop+'px',display:"block"},{progress:'20%', top:'300px',display:"block"},{progress:'30%', top:'200px',display:"none"},{progress:'100%',display:"none"}]);
+
+            jarallax.addAnimation('#cloud', [{progress:'0%', top:R.deviceH()+'px',display:"block"},{progress:'30%', top:limittop+'px',display:"block"},{progress:'45%', top:'300px',display:"block"},{progress:'60%', top:'200px',display:"block"}]);
+
+            jarallax.addAnimation('#free', [{progress:'30%', top:R.deviceH()+'px',display:"block"},{progress:'60%', top:limittop+'px',display:"block"},{progress:'75%', top:'300px',display:"block"},{progress:'95%', top:'200px',display:"block"}]);
+
+            jarallax.addAnimation('#after', [{progress:'60%', top:R.deviceH()+'px',display:"block"},{progress:'95%', top:limittop+'px',display:"block"},{progress:'100%',display:"block"}]);
+        }
+
+        $("#nav-dots span").click(function(event){
+            event.preventDefault();
+            jarallax.jumpToProgress($(this).attr("percent"), 1000, 30);
+        });
+        function setCurrentDot(num){
+            $("#nav-dots span").removeClass("nav-dot-current");
+            $("#nav-dots span").each(function(index){
+                if(index==parseInt(num))
+                    $(this).addClass("nav-dot-current");
+            });
+        }
+    });
+</script>
 
 </html>
