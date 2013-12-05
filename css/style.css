@@ -124,6 +124,10 @@ footer{
 #after img{
     width:30%;
 }
+#form-mailchimp{
+    width: 50%;
+    margin: 0 auto;
+}
 /**************SEPARADORES*****************/
 /*#hr-info{
 	border-top: 5em solid #d9d9d9;
