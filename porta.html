@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>GreenSock: Easing</title>
+    
+<style>
+body {
+	border: 0px;
+	margin: 0px;
+}
+
+::-webkit-scrollbar { 
+    display: none; 
+}
+
+#demo {
+	width: 692px;
+	height: 60px;
+	background-color: #333;
+	padding: 8px;
+}
+#easeWrapper {
+	width: 500px;
+	margin-right: auto;
+	margin-left: auto;
+	border-right: 1px dashed #CCC;
+	border-left: 1px dashed #CCC;
+}
+#logo {
+	position: relative;
+	width: 60px;
+	height: 60px;
+	background: url(img/logo_black.jpg) no-repeat;
+}
+.logo {
+	position: relative;
+	width: 100px;
+	height: 100px;
+	background: url(img/logo_black.jpg);
+}
+#listaproy{
+	border:  0px;
+	position: fixed;
+	width: 0px;
+	height: 200px;
+	top: 300px;
+}
+#listaproy ul{
+	padding: 0px;
+}
+
+#listaproy li{
+	position: absolute;
+	list-style-type: none;
+	margin: 50px 0 50px 0;
+	left: -200px;
+}
+
+#proyectos{
+	border:  0px;
+	position: fixed;
+	width: 0px;
+	background-color: #333;
+	height: 200px;
+	top: 320px;
+}
+
+#trabajos li{
+	position: relative;	
+	list-style-type: none;
+	margin: 50px 0 50px 0;
+	left: -200px;
+}
+
+#trabajos li a{
+	padding: 10px;
+	background-color: #333;
+}
+
+#trabajos{
+	background-color: #513;
+	border:  0px;
+	position: fixed;
+	width: 0px;
+	top: 200px;
+	height: 100%;
+	opacity: 0;
+}
+
+#divcontenidotrabajos{
+	border:  0px;
+	width: 100%;
+	height: 0px;
+	z-index: -1;
+}
+
+.contenido{
+	border-top: solid 20px;
+	border-color: black;
+	position: fixed;
+	width: 100%;
+	height: 100%;	
+}
+
+#title{
+	position: relative;
+	left: -500px;
+	top: 100px;
+}
+
+#head{
+	top: 0;
+	position: fixed;
+	width: 100%;
+	height: 200px;
+	background-color: #113;
+	color: white;
+	z-index: 0;
+}
+/*parallax*/
+.traba0 {	
+	background-color: #135;	
+	top: 1000px;
+}
+
+.traba1 {
+	background-color: #214;	
+	top: 1000px;
+}
+
+.traba2 {
+	background-color: #861;	
+	top: 1000px;
+}
+
+.traba3 {	
+	background-color: #671;	
+	top: 1000px;
+}
+
+.traba4 {	
+	background-color: #250;	
+	top: 1000px;
+}
+.traba5 {	
+	background-color: #750;	
+	top: 1000px;
+}
+
+</style>
+</head>
+<body>
+
+<div id="divcontenidotrabajos">
+	<div class="traba0 contenido" id="tdiv0" class="unselect tcontenido"></div>
+	<div class="traba1 contenido" id="tdiv1" class="unselect tcontenido"></div>
+	<div class="traba2 contenido" id="tdiv2" class="unselect tcontenido"></div>
+	<div class="traba3 contenido" id="tdiv3" class="unselect tcontenido"></div>
+	<div class="traba4 contenido" id="tdiv4" class="unselect tcontenido"></div>
+	<div class="traba5 contenido" id="tdiv5" class="unselect tcontenido"></div>
+</div>
+
+<div id="head">
+	<div id="title">
+		<h2>Titulo del Proyecto</h2>
+	</div>
+</div>
+
+<div id="trabajos">
+	<ul>
+		<li id="trab0"><a ini="10%" href="#">Trabajo2</a></li>
+		<li id="trab1"><a ini="25%" href="#">Trabajo2</a></li>
+		<li id="trab2"><a ini="40%" href="#">Trabajo3</a></li>
+		<li id="trab3"><a ini="55%" href="#">Trabajo4</a></li>
+		<li id="trab4"><a ini="70%" href="#">Trabajo5</a></li>
+		<li id="trab5"><a ini="85%" href="#">Trabajo6</a></li>
+	</ul>
+</div>
+
+
+<div id="proyectos">
+</div>
+
+<div id="listaproy">
+	<ul>
+		<li id="logo0"><div class="logo"></div></li>
+		<li id="logo1"><div class="logo"></div></li>
+		<li id="logo2"><div class="logo"></div></li>
+		<li id="logo3"><div class="logo"></div></li>
+		<li id="logo4"><div class="logo"></div></li>
+		<li id="logo5"><div class="logo"></div></li>
+	</ul>
+</div>
+
+</body>
+<script src="js/jquery/jquery-1.8.2.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.11.1/TweenMax.min.js"></script>
+<script src="js/jarallax-0.2.1.js"></script>
+<script src="http://airve.github.io/js/response/response.min.js"></script>
+
+
+<script>
+$(document).ready(function() {
+	var position = 90;
+	var count = 0;
+	var proy = $("#proyectos");
+	var ecep;
+	var proywidth = 0;
+	var indexproy = 0;
+	var $divcontenidotrabajos = $("#divcontenidotrabajos");
+	var $listaproy = $("#listaproy");
+	var $trabajos = $("#trabajos");
+
+	console.log($("body").width);
+
+	$divcontenidotrabajos.css("height","15000px");
+	var jarallax = new Jarallax();
+	initParalax()
+	$divcontenidotrabajos.css("height","0px");
+	TweenLite.to(proy, 2, {width:"100%", onUpdate:updateHandlerProyectos, onComplete:completeHandlerProyectos, ease:Quad.easeInOut});
+
+	function initParalax(){
+		jarallax.setDefault('.contenido', {opacity:'0'});
+		jarallax.addAnimation('.traba0', [{progress:'0%', top:'1000px',opacity:'1'}, {progress:'10%', top:'100px',opacity:'1'},{progress:'25%', top:'30px',opacity:'1'}]);
+		jarallax.addAnimation('.traba1', [{progress:'15%', top:'1000px',opacity:'1'}, {progress:'25%', top:'100px',opacity:'1'},{progress:'40%', top:'30px',opacity:'1'}]);
+		jarallax.addAnimation('.traba2', [{progress:'30%', top:'1000px',opacity:'1'}, {progress:'40%', top:'100px',opacity:'1'},{progress:'55%', top:'30px',opacity:'1'}]);
+		jarallax.addAnimation('.traba3', [{progress:'45%', top:'1000px',opacity:'1'}, {progress:'55%', top:'100px',opacity:'1'},{progress:'70%', top:'30px',opacity:'1'}]);
+		jarallax.addAnimation('.traba4', [{progress:'60%', top:'1000px',opacity:'1'}, {progress:'70%', top:'100px',opacity:'1'},{progress:'85%', top:'30px',opacity:'1'}]);
+		jarallax.addAnimation('.traba5', [{progress:'75%', top:'1000px',opacity:'1'}, {progress:'85%', top:'100px',opacity:'1'},{progress:'100%', top:'30px',opacity:'1'}]);
+		$trabajos.find("a").click(function(ev){
+			ev.preventDefault();
+			var point = $(this).attr("ini");
+			console.log(point);
+			jarallax.jumpToProgress(point, 2000, 30);
+		});
+	}
+
+	function updateHandlerProyectos() {
+		if(proy.width() > position+100){
+			TweenLite.to($("#logo"+count), 1, {left: (parseInt(position))+"px", onComplete:logofinish, 
+			onCompleteParams:[$("#logo"+count+" div")],ease:Cubic.easeInOut});			
+			position+=200;
+			count++;
+		}
+	}
+
+	function logofinish(data){
+		TweenMax.to(data, 1, {borderRadius:"50%"});
+	}
+
+	function completeHandlerProyectos() {
+		if($(".Pselected").length > 0){
+			$(".Pselected").unbind("click");
+			var tli = $(".Pselected")[0];
+			var position = $(tli).position();
+			position.left = position.left -70;
+			position.top = 0;
+			$(tli).removeClass("Pselected");
+			TweenMax.to(tli, 2, {bezier:[{x:100, y:250}, {x:position.left, y:position.top}],ease:Cubic.easeInOut});			
+			$divcontenidotrabajos.css("height","0px");
+		}
+		var quedan = $(".logo").length;
+		var i = 0;
+		while( count < quedan ){
+			$("#logo"+count).css("left",position+"px");
+			position+=200;
+			count++;
+		}
+		proywidth = proy.width()+100;
+		activeProyLi();
+	}
+
+	$listaproy.find("li div").hover(
+	  function() {
+	    TweenMax.to(this, 1, {ease:Linear.easeInOut,scale: 1.1, repeat: -1, yoyo: true});
+	  }, function() {
+	    TweenMax.to(this, .3, {scale: 1});
+	});
+
+	function activeProyLi(){		
+		$listaproy.find("li").click(function() {
+			$listaproy.find("li").unbind();
+			var position = $(this).position();
+			position.left = position.left*-1 +70;
+			position.top = -300;
+			$(this).addClass("Pselected");    
+			TweenMax.to(this, 2, {bezier:[{x:100, y:250}, {x:position.left, y:position.top}],ease:Cubic.easeInOut});
+		    ecep = $(this).attr('id');
+		    TweenLite.to(proy, 2, {width:"40px", onUpdate:updateHandlerhide, onComplete:closeproy, ease:Quad.easeInOut});
+		    indexproy++;
+		    $("#title").css("left","600px");
+		    TweenLite.from($("#title"), 2, {opacity:0, left:"-300px"});
+			TweenLite.to($trabajos, 1, {opacity:1, width:"300px"});
+	  });
+	}	
+
+	function updateHandlerhide() {
+		index = parseInt(proy.width()/200)-1;
+		if(proywidth > proy.width()){
+			if("logo"+index != ecep){
+				TweenLite.to($("#logo"+index), 1, {left: ((proywidth*-1)-200)+"px",ease:Cubic.easeInOut});
+			}
+			proywidth-=200;
+		}
+	}
+
+	function closeproy(){
+		$("#proyectos").hover(
+		function() {
+    		TweenMax.to(this, 0.5, {ease:Linear.easeInOut,width: "45px", repeat: -1, yoyo: true});
+	  	}, 
+	  	function() {
+	    	TweenMax.to(this, .3, {width: "40px"});
+		});
+		$("#proyectos").click(function(){
+			count = 0;
+			position = 90;
+			proywidth = 0;
+			TweenLite.to(proy, 2, {width:"100%", onUpdate:updateHandlerProyectos, onComplete:completeHandlerProyectos, ease:Quad.easeInOut});
+			$("#proyectos").unbind();
+			hiddenProy();
+			TweenLite.to($trabajos, 1, {opacity:0, width:"0px"});		
+			jarallax.jumpToProgress("0%", 2000, 20);			
+			TweenMax.to('.contenido', 2, {ease:Linear.easeInOut,opacity:0});
+		});
+		$divcontenidotrabajos.css("height","15000px");		
+		jarallax.jumpToProgress("10%", 2000, 30);
+		indexproy = 0;
+		trabajoready();
+	}
+
+	function trabajoready(){
+		if($trabajos.find("li").length>indexproy){
+			TweenLite.to($("#trab"+indexproy), 0.25, {left: "100px",onComplete:trabajoready,ease:Cubic.easeInOut});
+			indexproy++;
+		}
+	}
+
+	function hiddenProy(){
+		TweenLite.to($trabajos.find("li"), 0.25, {left: "-200px",ease:Cubic.easeInOut});
+		var div = $(".select");
+		TweenLite.to(div, 1, {opacity:0,onComplete:resetTrab,onCompleteParams:[div]});
+		TweenLite.to($("#title"), 2, {opacity:0, left:"-300px",onComplete:function(){ $("#title").css('opacity',1);}});
+	}
+
+	function resetTrab(div){
+		div.removeClass('select');
+		div.addClass("unselect");
+		div.css('opacity',1);
+	}
+});
+</script>
+</html>

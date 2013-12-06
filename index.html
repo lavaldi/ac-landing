@@ -155,22 +155,41 @@
                 setCurrentDot(3);
         });
         var R = Response; 
+        R.resize(function(){
+            console.log(R.viewportH());
+        });
+
+        var maxtop = parseInt(R.viewportH()+100);
         if(R.viewportW()>=960){
-            if(R.viewportW()>=1204)
-                var limittop = R.deviceH()*0.30
-            else
-                var limittop = R.deviceH()*0.25
+            //var limittop = parseInt(R.viewportH()*0.35);
+            var limittop = $("header").height();
+            var limithide = limittop-150;
             var jarallax = new Jarallax(new ControllerScroll(true));
             console.log(R.viewportW());
             jarallax.setDefault('#info', {top:limittop+'px'});
             jarallax.setDefault('#cloud,#free,#after', {display:'none'});
-            jarallax.addAnimation('#info', [{progress:'0%', top:limittop+'px',display:"block"},{progress:'20%', top:'300px',display:"block"},{progress:'30%', top:'200px',display:"none"},{progress:'100%',display:"none"}]);
+            jarallax.addAnimation('#info', [
+                {progress:'15%', top:limittop+'px',display:"block"},
+                {progress:'30%', top:limithide+'px',display:"block"},
+                {progress:'30%',display:"none"},
+                {progress:'100%',display:"none"}]);
 
-            jarallax.addAnimation('#cloud', [{progress:'0%', top:R.deviceH()+'px',display:"block"},{progress:'30%', top:limittop+'px',display:"block"},{progress:'45%', top:'300px',display:"block"},{progress:'60%', top:'200px',display:"block"}]);
+            jarallax.addAnimation('#cloud', [
+                {progress:'0%', top:maxtop+'px',display:"block"},
+                {progress:'30%', top:limittop+'px',display:"block"},
+                {progress:'45%', top:limittop+'px',display:"block"},
+                {progress:'60%', top:limithide+'px',display:"block"}]);
 
-            jarallax.addAnimation('#free', [{progress:'30%', top:R.deviceH()+'px',display:"block"},{progress:'60%', top:limittop+'px',display:"block"},{progress:'75%', top:'300px',display:"block"},{progress:'95%', top:'200px',display:"block"}]);
+            jarallax.addAnimation('#free', [
+                {progress:'30%', top:maxtop+'px',display:"block"},
+                {progress:'60%', top:limittop+'px',display:"block"},
+                {progress:'75%', top:limittop+'px',display:"block"},
+                {progress:'95%', top:limithide+'px',display:"block"}]);
 
-            jarallax.addAnimation('#after', [{progress:'60%', top:R.deviceH()+'px',display:"block"},{progress:'95%', top:limittop+'px',display:"block"},{progress:'100%',display:"block"}]);
+            jarallax.addAnimation('#after', [
+                {progress:'60%', top:maxtop+'px',display:"block"},
+                {progress:'95%', top:limittop+'px',display:"block"},
+                {progress:'100%',display:"block"}]);
         }
 
         $("#nav-dots span").click(function(event){

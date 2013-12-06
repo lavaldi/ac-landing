@@ -22,6 +22,7 @@ body {
 	color: #666;
 	font-size: 16px;
     overflow-x: hidden;
+    padding: 0;
 }
 h2{
     margin-bottom: 40px;
@@ -254,20 +255,6 @@ a:hover{
 }
 
 @media screen and (max-width:1024px){
-    body{
-        padding: 0;
-    }
-    #info h2, #free h2, #cloud h2{
-        font-size: 52px;
-        font-weight: 400; 
-        line-height: 35pt;
-        text-align: center;
-    }
-    #info p, #free p, #cloud p, #after p{
-        font-size: 25px;
-        font-weight: 300; 
-        line-height: 25pt;
-    }
     .metro .container {
         width: 100%!important;
     }
@@ -318,6 +305,22 @@ a:hover{
     .metro .span3, .metro .span4, .metro .span7, .metro .span8, .metro .span12{
         width: 100%!important;
     } 
+}
+@media screen and (max-height: 800px) {
+    #title{
+        width: 20%;
+    }
+    #after .span10{
+    padding-top: 40px;
+    }
+    #info, #cloud, #free,#after{
+        border-top: 0;
+        border-bottom: 0;
+    }
+    .wrapper{
+    padding: 20px 0;
+    }
+    .offset1
 }
 
 @media screen and (max-width: 320px) {
